@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Travel Camp</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'travel_html/style.css' %}">
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Welcome to Travel Campanion</h1>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <h2>Login</h2>
+        <form class='form' action='/login' method='POST'>
+            {% csrf_token %}
+            <label for="loginemail">Email:<input type="text" name="loginemail" id="loginemail"></label><br>
+            <label for="loginpassword">Password:<input type="password" name="loginpassword" id="loginpassword"></label><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
