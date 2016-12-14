@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Destination</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static '../../static/travelapp/css/tripstyle.css' %}">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="topbar">
+        <h2>Welcome, {{ user.name }}</h2>
+        <p style="text-align:right">
+            <a href="/logout">
+                <button class="button" type="button" name="logout">Log Out</button>
+            </a>
+        </p>
+    </div>
+    <h3><a href="/travels/add">Plan a trip</a></h3>
+    <h3><a href="/travels/search">Search trips</a></h3>
+    <h3><a>Cancel trip (Coming soon!)</a></h3>
+
+    <div id="yourtrips">
+        <h3 align="center">Your Trips</h3>
+
+        <table class="heavyTable">
+            <thead>
+            <th>Initiator</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Travel Date</th>
+            <th>Description</th>
+            <th>Travellers</th>
+            </thead>
+            <tbody>
+            {% if yourtrips or joinedtrips %}
+                {% for yourtrip in yourtrips %}
+                    <tr>
+                        <td>{{ user.name }}</td>
+                        <td>{{ yourtrip.start }}</td>
+                        <td>{{ yourtrip.destination }}</td>
+                        <td>{{ yourtrip.date }}</td>
+                        <td>{{ yourtrip.description }}</td>
+                        <td>{% for record in yourtrip.Guest.all %} {{ record.name }}, {% endfor %}</td>
+                    </tr>
+                {% endfor %}
+                {% if joinedtrips %}
+                    {% for joinedtrip in joinedtrips %}
+                        <tr>
+                            <td>{{ joinedtrip.User.name }}</td>
+                            <td>{{ joinedtrip.start }}</td>
+                            <td>{{ joinedtrip.destination }}</td>
+                            <td>{{ joinedtrip.date }}</td>
+                            <td>{{ joinedtrip.description }}</td>
+                            <td>{% for record in joinedtrip.Guest.all %} {{ record.name }}, {% endfor %}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            {% else %}
+                            <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+            {% endif %}
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <div id="trips">
+        <h3 align="center">Other Users' Scheduled Trips</h3>
+        {% if trips %}
+            <table>
+                <thead>
+                <th>Created by</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Travel Date</th>
+                <th>Description</th>
+                <th>Travellers</th>
+                <th>Join</th>
+                </thead>
+                <tbody>
+                {% for trip in trips %}
+                    <tr>
+                        <td>{{ trip.User.name }}</td>
+                        <td>{{ trip.start }}</td>
+                        <td>{{ trip.destination }}</td>
+                        <td>{{ trip.date }}</td>
+                        <td>{{ trip.description }}</td>
+                        <td>{% for record in trip.Guest.all %} {{ record.name }}, {% endfor %}</td>
+                        <td><a href="travels/destination/join/{{ trip.id }}">Join</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+
+    <script src="../../static/travelapp/js/tripstyle.js"></script>
+
+</div>
+</body>
+</html>

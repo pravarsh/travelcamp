@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Destination</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static '../../static/travelapp/css/tripstyle.css' %}">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="topbar">
+        <h2>Welcome, {{ user.name }}</h2>
+        <p style="text-align:right">
+        <a href="/logout" >
+            <button class="button" type="button" name="logout">Log Out</button>
+        </a>
+        </p>
+    </div>
+    <h3><a href="/travels/add">Plan a trip</a></h3>
+            <h3><a href="/travels/search">Modify search</a></h3>
+
+    <div id="commontrips">
+        <h3 align="center">Trips matching your search</h3>
+        {% if commontrips %}
+            <table class="heavyTable">
+                <thead>
+                <th>Initiator</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Travel Date</th>
+                <th>Description</th>
+                <th>Join</th>
+                </thead>
+                <tbody>
+                {% for yourtrip in commontrips %}
+                    <tr>
+                        <td>{{ yourtrip.User.name }}</td>
+                        <td>{{ yourtrip.start }}</td>
+                        <td>{{ yourtrip.destination }}</td>
+                        <td>{{ yourtrip.date }}</td>
+                        <td>{{ yourtrip.description }}</td>
+                        <td><a href="destination/join/{{ yourtrip.id }}">Join</a></td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+
+<script src="../../static/travelapp/js/tripstyle.js"></script>
+
+</div>
+</body>
+</html>
