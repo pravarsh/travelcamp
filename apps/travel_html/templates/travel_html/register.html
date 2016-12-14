@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+     <title>Travel Camp</title>
+    {% load staticfiles %}
+      <link rel="stylesheet" href="../../static/travelapp/css/style.css">
+
+
+</head>
+
+<body>
+ <div class="login-page">
+        <h2>Welcome to Travel Companion</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+  <div class="form">
+    <form class='login-form' action='/register' method='POST'>
+            {% csrf_token %}
+      <input type="text" name="name" id="name" placeholder="name"/>
+        <input type="text" name="email" id="email" placeholder="email"/>
+      <input type="password" name="passworda" id="passworda" placeholder="password"/>
+        <input type="password" name="passwordb" id="passwordb" placeholder="retype password"/>
+      <button type="submit" value="Register">create</button>
+      <p class="message">Already registered? <a href="login">Sign In</a></p>
+    </form>
+  </div>
+</div>
+    <script src="../../static/travelapp/js/index.js"></script>
+
+</body>
+</html>
