@@ -25,7 +25,7 @@ SECRET_KEY = 'v&hyi0#6db#&8#amn2nu^=1%=sb5u31ol_zzlbp^cwkpx^jg#w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -87,8 +87,6 @@ DATABASES = {
         'HOST': 'mysql',
         'PORT': '3306',
         #'HOST': '127.0.0.1',
-
-
         #'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         #'NAME': 'mydb',  # Or path to database file if using sqlite3.
         #'USER': 'myuser',

@@ -64,7 +64,6 @@ def add(request):
     }
     return render(request, 'travel_html/trip.html', context)
 
-
 def search(request):
     if not request.session['login']:
         messages.error(request, 'Please log in to access the application.')
@@ -89,7 +88,6 @@ def searchresult(request):
             'commontrips': commontrips,
         }
     return render(request, 'travel_html/travelsearch.html', context)
-
 
 def newtrip(request):
     if request.method == 'POST':

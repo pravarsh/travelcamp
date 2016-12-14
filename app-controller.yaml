@@ -1,0 +1,23 @@
+piVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  labels:
+    name: mysql
+spec:
+  containers:
+    - resources:
+        limits:
+          cpu: 0.5
+      image: mysql:5.6
+      name: mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          # Change this password!
+          value: yourpassword
+        - name: MYSQL_DATABASE
+          # Change this password!
+          value: mydb
+      ports:
+        - containerPort: 3306
+          name: mysql
