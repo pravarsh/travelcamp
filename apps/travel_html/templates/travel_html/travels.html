@@ -1,88 +1,95 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Destination</title>
-        {% load staticfiles %}
-        <link rel="stylesheet" type="text/css" href="{% static 'travel_html/css/style.css' %}">
-        <style>
-table, th, td {
-    border: 1px solid black;
-}
-</style>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <title>Destination</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static '../../static/travelapp/css/tripstyle.css' %}">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
 
-    <body>
-        <div id="wrapper">
-            <div id="topbar">
-                <h2>Welcome, {{ user.name }}</h2>
-                <a href="/logout"><button type="button" name="logout">Log Out</button></a>
-            </div>
-            <div id="yourtrips">
-                <h3>Your Trips</h3>
-                {% if yourtrips or joinedtrips %}
-                    <table>
-                        <th>Created by</th>
-                            <th>Start</th>
-                            <th>Destination</th>
-                            <th>Travel Date</th>
-                            <th>Description of trip</th>
-                        </thead>
-                        {% for yourtrip in yourtrips %}
-                            <tr>
-                            <td>{{ user.name }}</td>
-                                <td>{{ yourtrip.start }}</td>
-                                <td><a href="/travels/destination/{{ yourtrip.id }}">{{ yourtrip.destination }}</a></td>
-                                <td>{{ yourtrip.date }}</td>
-                                <td>{{ yourtrip.description }}</td>
-                            </tr>
-                        {% endfor %}
-                        {% if joinedtrips %}
-                            {% for joinedtrip in joinedtrips %}
-                                <tr>
-                                <td>{{ joinedtrip.User.name }}</td>
-                                    <td>{{ joinedtrip.start }}</td>
-                                    <td><a href="/travels/destination/{{ joinedtrip.id }}">{{ joinedtrip.destination }}</a></td>
-                                    <td>{{ joinedtrip.date }}</td>
-                                    <td>{{ joinedtrip.description }}</td>
-                                </tr>
-                            {% endfor %}
-                        {% endif %}
-                    </table>
-                {% else %}
-                    <h3><a href="/travels/add">You have no trips. Add one now!</a></h3>
+<body>
+<div id="wrapper">
+    <div id="topbar">
+        <h2>Welcome, {{ user.name }}</h2>
+        <a href="/logout">
+            <button type="button" name="logout">Log Out</button>
+        </a>
+    </div>
+    <div id="yourtrips">
+        <h3>Your Trips</h3>
+        {% if yourtrips or joinedtrips %}
+            <table>
+                <thead>
+                <th>Created by</th>
+                <th>Start</th>
+                <th>Destination</th>
+                <th>Travel Date</th>
+                <th>Description of trip</th>
+                </thead>
+                <tbody>
+                {% for yourtrip in yourtrips %}
+                    <tr>
+                        <td>{{ user.name }}</td>
+                        <td>{{ yourtrip.start }}</td>
+                        <td><a href="/travels/destination/{{ yourtrip.id }}">{{ yourtrip.destination }}</a></td>
+                        <td>{{ yourtrip.date }}</td>
+                        <td>{{ yourtrip.description }}</td>
+                    </tr>
+                {% endfor %}
+                {% if joinedtrips %}
+                    {% for joinedtrip in joinedtrips %}
+                        <tr>
+                            <td>{{ joinedtrip.User.name }}</td>
+                            <td>{{ joinedtrip.start }}</td>
+                            <td><a href="/travels/destination/{{ joinedtrip.id }}">{{ joinedtrip.destination }}</a></td>
+                            <td>{{ joinedtrip.date }}</td>
+                            <td>{{ joinedtrip.description }}</td>
+                        </tr>
+                    {% endfor %}
                 {% endif %}
-            </div>
+                </tbody>
+            </table>
+        {% else %}
+            <h3><a href="/travels/add">You have no trips. Add one now!</a></h3>
+        {% endif %}
+    </div>
 
 
-            <div id="trips">
-                <h3>Other Users' Scheduled Trips</h3>
-                {% if trips %}
-                    <table>
-                        <thead>
-                            <th>Created by</th>
-                            <th>Start</th>
-                            <th>Destination</th>
-                            <th>Travel Date</th>
-                            <th>Description</th>
-                            <th>People who are joining this</th>
-                            <th>Join this trip?</th>
-                        </thead>
-                        {% for trip in trips %}
-                            <tr>
-                                <td>{{ trip.User.name }}</td>
-                                <td>{{ trip.start }}</td>
-                                <td><a href="/travels/destination/{{ trip.id }}">{{ trip.destination }}</a></td>
-                                <td>{{ trip.date }}</td>
-                                <td>{{ trip.description }}</td>
-                                <td>{% for record in trip.Guest.all %} {{ record.name }}, {%endfor%}</td>
-                                <td><a href="travels/destination/join/{{ trip.id }}">Join this trip!</a></td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                {% endif %}
-            </div>
-            <h5><a href="/travels/add">Add trip!</a></h5>
-        </div>
-    </body>
+    <div id="trips">
+        <h3>Other Users' Scheduled Trips</h3>
+        {% if trips %}
+            <table>
+                <thead>
+                <th>Created by</th>
+                <th>Start</th>
+                <th>Destination</th>
+                <th>Travel Date</th>
+                <th>Description</th>
+                <th>People who are joining this</th>
+                <th>Join this trip?</th>
+                </thead>
+                <tbody>
+                {% for trip in trips %}
+                    <tr>
+                        <td>{{ trip.User.name }}</td>
+                        <td>{{ trip.start }}</td>
+                        <td><a href="/travels/destination/{{ trip.id }}">{{ trip.destination }}</a></td>
+                        <td>{{ trip.date }}</td>
+                        <td>{{ trip.description }}</td>
+                        <td>{% for record in trip.Guest.all %} {{ record.name }}, {% endfor %}</td>
+                        <td><a href="travels/destination/join/{{ trip.id }}">Join this trip!</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+    <h5><a href="/travels/add">Add trip!</a></h5>
+</div>
+</body>
 </html>

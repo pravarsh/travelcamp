@@ -1,24 +1,34 @@
-<html>
+<!DOCTYPE html>
+<html >
 <head>
-    <title>Travel Camp</title>
+  <meta charset="UTF-8">
+     <title>Travel Camp</title>
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'travel_html/css/style.css' %}">
+      <link rel="stylesheet" href="../../static/travelapp/css/style.css">
+
+  
 </head>
+
 <body>
-    <div id="wrapper">
-        <h1>Welcome to Travel Campanion</h1>
+ <div class="login-page">
+        <h2>Welcome to Travel Companion</h2>
         {% if messages %}
             {% for message in messages %}
                 <p class="error">{{ message }}</p>
             {% endfor %}
         {% endif %}
-        <h2>Login</h2>
-        <form class='form' action='/login' method='POST'>
-            {% csrf_token %}
-            <label for="loginemail">Email:<input type="text" name="loginemail" id="loginemail"></label><br>
-            <label for="loginpassword">Password:<input type="password" name="loginpassword" id="loginpassword"></label><br>
-            <input type="submit" value="Login">
-        </form>
-    </div>
+  <div class="form">
+    <form class="login-form"  action='/login' method='POST'>
+        {% csrf_token %}
+      <input type="text" name="loginemail" id="loginemail" placeholder="username"/>
+      <input type="password" name="loginpassword" id="loginpassword" placeholder="password"/>
+        <button type="submit" value="Login"> login</button>
+        <br/>
+      <p class="message">Not registered? <a href="register">Create an account</a></p>
+    </form>
+  </div>
+</div>
+    <script src="../../static/travelapp/js/index.js"></script>
+
 </body>
 </html>
