@@ -87,8 +87,6 @@ DATABASES = {
         'HOST': 'mysql',
         'PORT': '3306',
         #'HOST': '127.0.0.1',
-
-
         #'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         #'NAME': 'mydb',  # Or path to database file if using sqlite3.
         #'USER': 'myuser',
